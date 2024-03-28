@@ -23,12 +23,8 @@ public class Main {
 		
 		List<TaxPayer> taxPayer = new ArrayList<>(n);
 		
-		double salaryTax = 0.0;
-		double servIcome = 0.0;
-		double capIcome = 0.0;
-		double grossTax =0.0;
-		double rebate = 0.0;
-		double netTax = 0.0;
+		
+		
 		for(int x =0; x < n; x++) {
 			
 			System.out.println("Enter the data of the "+(x+1)+" taxpayer:");
@@ -47,25 +43,34 @@ public class Main {
 			
 			TaxPayer taxy = new TaxPayer(anulaIcome, serviceIcome, capitalIcome, med, educ);
 			
-		
-			
-			salaryTax = taxy.salaryTax(anulaIcome);
-			servIcome = taxy.serviceTax(serviceIcome);
-			capIcome = taxy.capitalTax(capitalIcome);
-			
-			grossTax = taxy.grossTax(salaryTax, servIcome, capIcome);
-			rebate = taxy.taxRebate(grossTax);
-			netTax = taxy.netTax(grossTax, rebate);
 			
 			taxPayer.add(taxy);
 			
 		}
 		
+		
+		
+		for(int x=0; x < taxPayer.size(); x++) {
+			TaxPayer tax =taxPayer.get(x);
+			
+			double salaryTa = tax.salaryTax(tax.getSalaryIncome());
+			double salarySer = tax.serviceTax(tax.getServicesIncome());
+			double salaryCap = tax.capitalTax(tax.getCapitalIncome());
+			double grossTax = tax.grossTax(salaryTa, salarySer, salaryCap);
+			double rebate = tax.taxRebate(grossTax);
+			double netTax = tax.netTax(grossTax, rebate);
+			
+			
 			
 			System.out.println("contributor  summary");
-			System.out.println("Total gross tax: "+grossTax);
-			System.out.println("Rebate: "+rebate);
-			System.out.println("Tax due: "+netTax);
+			System.out.printf("Total gross tax:%.2f\n",grossTax);
+			System.out.printf("Rebate:%.2f\n",rebate);
+			System.out.printf("Tax due:%.2f\n",netTax);
+			
+		}
+		
+			
+			
 		
 		
 
